@@ -1,0 +1,82 @@
+from datetime import datetime
+
+
+def process_people(people_data):
+    today = datetime.now()
+    processed_people = []
+
+
+    for person in people_data:
+        name = person.get("name")
+        date_str = str(person.get("birth_date"))
+
+        try:
+
+            birth_date = datetime.strptime(date_str, "%Y-%m-%d")
+
+
+            if birth_date > today:
+                print(f"Invalid date for {name}")
+                return
+
+        except ValueError:
+
+            print(f"Invalid date for {name}")
+            return
+
+
+        age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+
+
+        day_name = birth_date.strftime("%A")
+
+        processed_people.append({
+            "name": name,
+            "age": age,
+            "day_name": day_name,
+            "birth_date": birth_date
+        })
+
+
+    for p in processed_people:
+        print(f"Name: {p['name']} | Age: {p['age']} | Born on: {p['day_name']}")
+
+
+    total_count = len(processed_people)
+    print(f"Total people processed: {total_count}")
+
+    if total_count == 1:
+        print("There is no oldest or youngest person")
+    elif total_count > 1:
+
+        oldest = min(processed_people, key=lambda x: x["birth_date"])
+        youngest = max(processed_people, key=lambda x: x["birth_date"])
+
+        print(f"Oldest person: {oldest['name']} ({oldest['age']} years old)")
+        print(f"Youngest person: {youngest['name']} ({youngest['age']} years old)")
+
+
+
+
+
+data1 = [
+    {"name " : "sara", "birth_date": "1995-05-15"},
+    {"name": "aziz", "birth_date": "2005-10-20"},
+    {"name": "kreem", "birth_date": "1988-02-01"}
+]
+process_people(data1)
+
+print("-" * 30)
+
+
+data2 = [
+    {"name": "max", "birth_date": "2000-01-01"}
+]
+process_people(data2)
+
+print("-" * 30)
+
+data3 = [
+    {"name": "lalo", "birth_date": "1999-14-05"}
+]
+process_people(data3)
