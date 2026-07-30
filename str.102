@@ -1,6 +1,4 @@
 from datetime import datetime
-
-
 def process_people(people_data):
     today = datetime.now()
     processed_people = []
@@ -60,9 +58,9 @@ def process_people(people_data):
 
 
 data1 = [
-    {"name " : "sara", "birth_date": "1995-05-15"},
+    {"name " : "sara", "birth_date": "2003-05-15"},
     {"name": "aziz", "birth_date": "2005-10-20"},
-    {"name": "kreem", "birth_date": "1988-02-01"}
+    {"name": "kreem", "birth_date": "1999-02-01"}
 ]
 process_people(data1)
 
